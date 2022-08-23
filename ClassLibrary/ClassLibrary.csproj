@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <DocumentationFile>C:\Users\wenqi\Desktop\Exam-new\Code\A\Cooler\ClassLibrary\ClassLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+
+</Project>

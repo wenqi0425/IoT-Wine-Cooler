@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--responsive, The viewport is the user's visible area of a web page.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <title>JS</title>
+    <link rel="stylesheet" href="Cooler.css">
+</head>
+<body>
+    <div id="app">
+        <h1 class="text-center"> Cooler Web App</h1>
+        <br>
+
+        <h2 class="text-center"> Cooler List </h2>
+
+        <!-- Sort By Storage-->
+        <div>
+            <button class="btn btn-warning" @click="SortByStorage()"> Sort By Storage </button>  
+        </div>
+
+        <!-- Get All--> 
+        <div>
+            <button class="btn btn-primary" @click="GetAll()"> Get All</button>  
+        </div>     
+        <div class="Container" v-if="coolers">            
+            <table class="table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> Id </th>
+                        <th> Location </th>
+                        <th> Capacity </th>
+                        <th> Storage </th>
+                        <th> Temp </th>
+                        <th> Delete </th>
+                        <th> Add Wine </th>
+                    </tr>                    
+                </thead>
+    
+                <tbody>
+                    <tr v-for = "cooler in coolers">                        
+                        <td>{{cooler.id}}</td>
+                        <td>{{cooler.location}}</td>
+                        <td>{{cooler.capacity}}</td> 
+                        <td>{{cooler.storage}}</td>
+                        <td>{{cooler.temp}}</td>
+
+                        <!-- Delete By Id
+                        <td><button class="btn btn-danger" @click="DeleteById()">Delete</button></td>
+                        -->
+
+                        <!-- Delete By Query -->
+                        <td><button class="btn btn-danger" @click="DeleteById(cooler.id)">Delete</button></td>                        
+
+                        <!-- Add Wine-->
+                        <td><button class="btn btn-info" 
+                            @click="AddWine(cooler.id)">Add Wine</button></td>
+
+                        <!--Show Status ????
+                        <td><button class="btn btn-info" 
+                            v-bind:class="[isEmpty ? 'empty' : '', isFull ? 'full' : '']"
+                            :style="{color: color, background: is}" 
+                            @click="GetCoolerAfterAddWine(cooler.id)">Add Wine</button></td>
+                        -->
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+        <hr>        
+
+        <!-- Filter By Capacity-->
+        <div>
+            <button class="btn btn-secondary" @click="FilterByCapacity()"> Filter By Capacity </button>
+            <input type="number" placeholder="capacity" v-model.number="capacity">  
+        </div>
+        <hr> 
+
+        <div>
+            <button class="btn btn-secondary" @click="FilterByLocation()"> Filter By Location </button>
+            <input type="text" placeholder="location" v-model.v-text="location">  
+        </div>
+        <hr>
+
+        <!-- Get By Id-->
+        <div>
+            <button class="btn btn-primary" @click="GetById()"> Get By Id</button>  
+            <input type="number" placeholder="id" v-model.number="id">
+        </div>
+
+        <div class="Container" v-if="cooler">
+            <h2 class="text-center"> Cooler with the Id: {{cooler.id}} </h2>
+            <table class="table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th> Id </th>
+                        <th> Location </th>
+                        <th> Capacity </th>
+                        <th> Storage </th>
+                        <th> Temp </th>
+                    </tr>                    
+                </thead>
+    
+                <tbody>
+                    <tr>
+                        <td>{{cooler.id}}</td>
+                        <td>{{cooler.location}}</td>
+                        <td>{{cooler.capacity}}</td>
+                        <td>{{cooler.storage}}</td>
+                        <td>{{cooler.temp}}</td>
+
+                        <td v-if="coolers.status=='Full'">
+                            <span style="color:red">{{coolers.status}}</span> 
+                        </td>
+                        <td v-if="coolers.status=='Empty'">
+                            <span style="color:blue">{{coolers.status}}</span> 
+                        </td>
+                        <td v-if="coolers.status=='Not Full'">
+                            <span style="color:green    ">{{coolers.status}}</span> 
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>   
+        <hr>       
+
+
+        <!-- Add New Cooler-->
+        <div>
+            <button class="btn btn-success" @click="AddNewCooler()"> Add New Cooler</button>
+        </div>
+        <div class="container">
+            Location: <input type="text" v-model="coolerPost.location" placeholder="location">
+            Capacity: <input type="number" v-model="coolerPost.capacity" placeholder="capacity"> 
+            Storage: <input type="number" v-model="coolerPost.storage" placeholder="storage"> 
+            Temp: <input type="number" v-model="coolerPost.temp" placeholder="temp"> 
+        </div>        
+        <hr>
+        
+        <!-- Update Cooler-->
+        <div>
+            <button class="btn btn-info" @click="UpdateCooler()"> Update Cooler</button>
+            with Id: <input type="number" v-model.number="id" placeholder="id">
+        </div>
+        <div class="container">             
+            Location: <input type="text" v-model="coolerUpdate.location" placeholder="location">
+            Capacity: <input type="number" v-model="coolerUpdate.capacity" placeholder="capacity">
+            Storage: <input type="number" v-model="coolerUpdate.storage" placeholder="storage"> 
+            Temp: <input type="number" v-model="coolerUpdate.temp" placeholder="temp">
+            <!-- v-model.number bind the data of cooler 
+                Temp: <input type="number" v-model.number="temp" placeholder="temp"> -->
+        </div> 
+    </div>
+ 
+    <script src = "Cooler.js"></script>
+</body>
+
+</html>

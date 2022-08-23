@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClassLibrary</name>
+    </assembly>
+    <members>
+        <member name="M:ClassLibrary.Cooler.CoolerIsFull">
+            <summary>
+            When Capacity == Storage, the Cooler is full
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLibrary.Cooler.AddWine">
+            <summary>
+            add a single bottle of wine to the cooler
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
