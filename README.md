@@ -13,7 +13,7 @@
 3) REST API
 4) UDP Broadcast
 5) TCP 
-6) VUE
+6) VUE and JavaScript
 7) HTML
 8) CSS
 9) Unit Test
