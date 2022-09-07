@@ -18,7 +18,6 @@
 8) CSS
 9) Unit Test
 
-## Nuget 
+## Nuget
 Microsoft.EntityFrameworkCore
-Microsoft.EntityFrameworkCore.SqlServer
-Microsoft.EntityFrameworkCore.Tools
+
