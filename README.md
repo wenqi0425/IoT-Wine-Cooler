@@ -20,4 +20,4 @@
 
 ## Nuget
 Microsoft.EntityFrameworkCore
-
+Microsoft.EntityFrameworkCore.SqlServer
